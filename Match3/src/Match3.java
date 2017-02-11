@@ -20,23 +20,32 @@ public class Match3 extends JFrame {
 
         JPanel panel = new JPanel(new GridLayout(8, 8));
         setContentPane(panel);
+        
+        JPanel[][] grid = new JPanel[8][8];
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                JPanel grid = new JPanel();
-                grid.setPreferredSize(new Dimension(100, 100)); //размерность сетки
-                grid.setBackground(Color.WHITE);
+                JPanel cell = new JPanel();
+                cell.setPreferredSize(new Dimension(100, 100)); //размерность сетки
+                //grid.setBackground(Color.WHITE);
+
                 GridBagConstraints constraints = new GridBagConstraints();  //ограничения
                 constraints.gridx = i;
                 constraints.gridy = j;
                 constraints.fill = GridBagConstraints.NONE;
-                panel.add(grid, constraints);
+                panel.add(cell, constraints);
+
                 LineBorder border = new LineBorder(Color.BLACK, 1);
-                grid.setBorder(border);
+                cell.setBorder(border);
 
                 Random random = new Random();
                 Color colors[] = {Color.GREEN, Color.ORANGE, Color.RED, Color.YELLOW, Color.PINK, Color.DARK_GRAY, Color.BLUE};
                 int pos = random.nextInt(colors.length);
-                grid.setBackground(colors[pos]);
+                cell.setBackground(colors[pos]);
+                
+                //if (lookForMatches().length != 0) continue;
+                
+                grid[i][j] = cell;
 
             }
         }
